@@ -35,3 +35,4 @@ The author is **not responsible** for any misuse, illegal activities, or consequ
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/Said-Amarire/arcade-cpa-funnel.git](https://github.com/Said-Amarire/arcade-cpa-funnel.git)
+```
