@@ -6,7 +6,7 @@ A fully optimized, high-converting frontend landing page template engineered for
 ## 🔗 Live Demo
 
 Want to see the system in action before cloning or deployment? Check out the live interactive preview here:
-👉 **[Launch Live Project Demo](https://roblox-reward-gateway-cpa.vercel.app)** *(Replace this URL with your actual demo link)*
+👉 **[Launch Live Project Demo](https://roblox-reward-gateway-cpa.vercel.app)**
 
 
 ## 📂 Project Directory Structure
