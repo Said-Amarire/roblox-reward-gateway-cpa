@@ -10,13 +10,16 @@
  * @license   MIT
  */
 
+
+/**
+ * APPLICATION FRONTEND ENGINE
+ * Production-ready enterprise implementation handling UI transitions, 
+ * synchronized audio contexts, hardware-accelerated animations, and external services.
+ * Optimized for open-source deployment on GitHub.
+ */
 (() => {
     'use strict';
 
-    /**
-     * Silences rejected promises safely to prevent unhandled rejections in audio routing.
-     * @param {Promise} p - Target promise to execute safely.
-     */
     const silent = p => p?.catch(() => {});
 
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -26,10 +29,6 @@
 
     const GESTURE_EVENTS = ['touchstart', 'pointerdown', 'mousedown', 'keydown'];
 
-    /**
-     * Unlocks the browser AudioContext tracking user interaction gestures.
-     * @returns {void}
-     */
     function unlock() {
         if (unlocked || !ctx) return;
         ctx.resume().then(() => {
@@ -37,12 +36,8 @@
             GESTURE_EVENTS.forEach(ev => document.removeEventListener(ev, unlock));
         }).catch(() => {});
     }
-    gESTURE_EVENTS.forEach(ev => document.addEventListener(ev, unlock, { once: true, passive: true }));
+    GESTURE_EVENTS.forEach(ev => document.addEventListener(ev, unlock, { once: true, passive: true }));
 
-    /**
-     * Pre-fetches and decodes required audio buffers for application SFX layers.
-     * @returns {void}
-     */
     const initAudioEngine = () => {
         if (!ctx) return;
         const elements = {
@@ -69,11 +64,6 @@
         initAudioEngine();
     }
 
-    /**
-     * Plays a pre-loaded audio buffer source with custom gain configurations.
-     * @param {string} key - The lookup key for the target audio element.
-     * @param {number} [vol=1] - Volume amplitude scaler.
-     */
     function playBuffer(key, vol = 1) {
         if (!ctx || !audioBuffers[key]) return;
         if (ctx.state === 'suspended') silent(ctx.resume());
@@ -87,9 +77,6 @@
         } catch (e) {}
     }
 
-    /**
-     * Global Audio Gateway Sound Effects Controller API mapping.
-     */
     window.GAG_SFX = {
         click:   () => playBuffer('click', 1),
         ding:    () => playBuffer('ding', 1),
@@ -108,24 +95,13 @@
     };
 })();
 
-/**
- * Main Application View Orchestrator and DOM State Controller lifecycle binding.
- */
 document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * Millisecond transition lookup matrix for UI synchronization hooks.
-     * @type {Object<string, number>}
-     */
     const UI_TIMEOUT = {
         DESELECT: 250, SHAKE: 350, POP: 400,
         LOADER_MIN: 1500, LOADER_REMOVE: 400, FLY_FALLBACK: 900,
         VERIFY: 5000, SEARCH: 4000 
     };
 
-    /**
-     * Static DOM Node pointer map for the application architecture.
-     * @type {Object<string, HTMLElement|NodeList>}
-     */
     const UI = {
         loader: document.getElementById('page-loader'),
         slotsContainer: document.getElementById('slots'),
@@ -169,16 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let animatingCount = 0;
     let isProcessing = false;
 
-    /**
-     * Calculates combined total of currently resolved items and active flying animation tasks.
-     * @returns {number} Sum of current item queue size.
-     */
     function currentCount() { return selectedItems.length + animatingCount; }
 
-    /**
-     * Toggles CSS limit markers on the layout depending on maximum choice configuration boundaries.
-     * @returns {void}
-     */
     function updateGalleryState() {
         if (currentCount() >= MAX_SECTIONS) {
             UI.galleryContainer.classList.add('max-reached');
@@ -254,13 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /**
-     * Executes hardware-accelerated 3D vector transformations simulating reward card collection trajectories.
-     * @param {HTMLElement} sourceCard - Root trigger container element.
-     * @param {HTMLElement} targetSlot - Destination target node boundary box.
-     * @param {number} targetSlotNum - Destination index mapping identifier.
-     * @param {Function} onComplete - Lifecycle tracking finalization callback wrapper.
-     */
     function animateFlyEffect(sourceCard, targetSlot, targetSlotNum, onComplete) {
         const frame = sourceCard.querySelector('.frame');
         const sourceElement = frame || sourceCard;
@@ -307,20 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
         flyingElem.addEventListener('transitionend', () => { clearTimeout(fallback); cleanup(); }, { once: true });
     }
 
-    /**
-     * Appends target card element references into the internal runtime choice pipeline arrays.
-     * @param {HTMLElement} card - Target node element.
-     */
     function selectCard(card) {
         if (selectedItems.includes(card) || selectedItems.length >= MAX_SECTIONS) return;
         selectedItems.push(card);
         renderSlots();
     }
 
-    /**
-     * Safely flushes a specified card node tracking context out of runtime memory matrices.
-     * @param {HTMLElement} card - Target node element.
-     */
     function deselectCard(card) {
         card.classList.remove('selected');
         const frame = card.querySelector('.frame');
@@ -329,10 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSlots();
     }
 
-    /**
-     * Re-renders state structures inside view containers mapping user option selections.
-     * @returns {void}
-     */
     function renderSlots() {
         for (let i = 1; i <= 3; i++) {
             const slot = document.getElementById(`slot${i}`);
